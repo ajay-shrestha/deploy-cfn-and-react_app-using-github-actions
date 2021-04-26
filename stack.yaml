@@ -59,15 +59,7 @@ Resources:
 
 
 
-  AmplifyDomain:
-    Type: AWS::Amplify::Domain
-    Condition: UseCustomDomain
-    Properties:
-      DomainName: !Ref Domain
-      AppId: !GetAtt AmplifyApp.AppId
-      SubDomainSettings:
-        - Prefix: master
-          BranchName: !GetAtt AmplifyBranch.BranchName
+
 
 Outputs:
   DefaultDomain:
