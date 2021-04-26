@@ -57,9 +57,22 @@ Resources:
       OauthToken: !Ref OauthToken
       IAMServiceRole: !GetAtt AmplifyRole.Arn
 
+  AmplifyBranch:
+    Type: AWS::Amplify::Branch
+    Properties:
+      BranchName: !Ref Branch
+      AppId: !GetAtt AmplifyApp.AppId
+      EnableAutoBuild: true
 
-
-
+  AmplifyDomain:
+    Type: AWS::Amplify::Domain
+    Condition: UseCustomDomain
+    Properties:
+      DomainName: !Ref Domain
+      AppId: !GetAtt AmplifyApp.AppId
+      SubDomainSettings:
+        - Prefix: master
+          BranchName: !GetAtt AmplifyBranch.BranchName
 
 Outputs:
   DefaultDomain:
